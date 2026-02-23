@@ -25,3 +25,4 @@ If you have any bonus specs, bonus or any details the TA's should know, you shou
 Phase 1: Bug Fixes
 
 Fixed enemies position: Normarie
+Re-added enemies to the next iterartion of the game: Normarie 
