@@ -19,6 +19,7 @@ class Enemy {
         std::pair<float, float> position;
         HitBox hitBox;
         int scoreValue;
+        bool killed= false;
 
         inline static float direction = 0.5;
         inline static int directionChange = 100;
@@ -55,6 +56,7 @@ class Enemy {
                     for (Projectile& p2 : Projectile::projectiles) {
                         if (p2.ID != 1 && HitBox::Collision(p.second->hitBox, p2.getHitBox())) {
                             p.second->health--;
+                            p.second->killed = true;
                             p2.del = true;
                         }
                     }
@@ -63,8 +65,9 @@ class Enemy {
                         Animation::animations.push_back(
                             Animation(p.second->position.first, p.second->position.second, 155, 0, 33, 33, 30, 30, 4, ImageManager::SpriteSheet)
                         );
-
-                        scoreAll += p.second->scoreValue;
+                        if (p.second->killed) {
+                                scoreAll += p.second->scoreValue;
+                            }
                         std::cout << "DEAD: "<< scoreAll << std::endl; 
                         p.second = nullptr;
                     }
