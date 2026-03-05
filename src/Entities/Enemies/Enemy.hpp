@@ -18,6 +18,7 @@ class Enemy {
         int health = 1;
         std::pair<float, float> position;
         HitBox hitBox;
+        int scoreValue;
 
         inline static float direction = 0.5;
         inline static int directionChange = 100;
@@ -44,7 +45,8 @@ class Enemy {
              }
         }
 
-        static void ManageEnemies(HitBox target) {
+        static int ManageEnemies(HitBox target) {
+            int scoreAll = 0;
             for (std::pair<std::pair<float, float>, Enemy*>& p : Enemy::enemies) {
                 p.first.first += (p.first.first == 0) ? 0 : direction;
                 if (p.second) {
@@ -61,6 +63,9 @@ class Enemy {
                         Animation::animations.push_back(
                             Animation(p.second->position.first, p.second->position.second, 155, 0, 33, 33, 30, 30, 4, ImageManager::SpriteSheet)
                         );
+
+                        scoreAll += p.second->scoreValue;
+                        std::cout << "DEAD: "<< scoreAll << std::endl; 
                         p.second = nullptr;
                     }
                 }
@@ -79,5 +84,6 @@ class Enemy {
                 directionChange = 0;
                 direction *= -1;
             }
+            return scoreAll;
         }
 };

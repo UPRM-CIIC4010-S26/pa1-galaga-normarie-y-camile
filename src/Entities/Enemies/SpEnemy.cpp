@@ -1,6 +1,5 @@
 #include "SpEnemy.hpp"
 
-
 void SpEnemy::draw() {
     if (HitBox::drawHitbox) this->hitBox.draw();
     if (health > 2) {

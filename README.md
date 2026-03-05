@@ -12,6 +12,7 @@ Don't forget that you must also fill out an evaluation form in Moodle to conside
 ## Grading
 
 (802-25-7836)  (Normarie Martinez Flores)  (normarie.martinez@upr.edu)
+
 (STUDENT NUMBER HERE) (STUDENT NAME HERE) (STUDENT EMAIL HERE)
 
 Any project that doesn't compile will receive a 0.
@@ -22,7 +23,13 @@ If a partner has no commits in the repositories, they will receive a 0.
 
 ## Student Notes
 If you have any bonus specs, bonus or any details the TA's should know, you should include it here:
+
 Phase 1: Bug Fixes
 
 Fixed enemies position: Normarie
+
 Re-added enemies to the next iterartion of the game: Normarie 
+
+PHASE 2: Score Features: Normarie
+
+Made score for each enemy, score resets when player dies. 
