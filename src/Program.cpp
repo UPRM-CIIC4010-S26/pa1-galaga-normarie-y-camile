@@ -69,8 +69,8 @@ void Program::Update() {
         Projectile::CleanProjectiles();
         Projectile::ProjectileCollision();
     }
-    std::cout << score << std::endl;
-    
+    //std::cout << score << std::endl; test
+    // update lives 
     int milestones = score / 1000;
 
     while (bonusLivesGiven < milestones) {
@@ -108,7 +108,9 @@ void Program::ManageEnemyRespawns() {
 
     respawnCooldown -= 1;
     if (respawnCooldown <= 0) {
-        respawnCooldown = 1080;
+        //update cooldown speed 
+        respawnCooldown = 1080 - (score / 20);
+        respawnCooldown = std::max(respawnCooldown, 200);
         for (std::pair<std::pair<float, float>, Enemy*>& p : Enemy::enemies) {
             if (!p.second && p.first.second != 150) {
                 int eType = GetRandomValue(1, 3);
@@ -119,7 +121,6 @@ void Program::ManageEnemyRespawns() {
                 } else {
                     p.second = new StdEnemy(GetScreenWidth() / 2 - 15, 0, true);
                 }
-
                 respawns++;
                 break;
             } else if (!p.second && p.first.second == 150) {
@@ -128,6 +129,7 @@ void Program::ManageEnemyRespawns() {
                 break;
             }
         }
+        // std::cout << "COOLDOWN: "<< respawnCooldown << std::endl;
     }
 
     if(respawns >= 4) {
