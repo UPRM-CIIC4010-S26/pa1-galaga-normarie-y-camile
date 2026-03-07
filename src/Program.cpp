@@ -61,6 +61,17 @@ void Program::Update() {
 
         for (Projectile& p : Projectile::projectiles) { 
             p.update(); 
+            if (p.ID != 0 && HitBox::Collision(player->hitBox, p.getHitBox())) {
+                Animation::animations.push_back(
+                    Animation(player->position.first, player->position.second, 16, 0, 33, 34, 30 ,30, 3, ImageManager::SpriteSheet)
+                );
+
+                PlaySound(SoundManager::gameOver);
+                Projectile::projectiles.clear();
+                player->position.first = GetScreenWidth() / 2 - 15;
+                pauseFrames = 120;
+                lives--;
+            }
 
         }
 
