@@ -27,6 +27,7 @@ Program::Program() {
             new StdEnemy(x, y)
         });
     }
+    PlaySound(SoundManager::start);
 
 }
 
@@ -109,7 +110,9 @@ void Program::Draw() {
     for (Projectile p : Projectile::projectiles) p.draw();
     for (std::pair<std::pair<float, float>, Enemy*>& p : Enemy::enemies) if (p.second) p.second->draw();
 
-    if (startup) DrawStartup();
+    if (startup) {
+        DrawStartup();
+    } 
     if (paused) DrawPauseScreen();
     if (gameOver) DrawGameOver();
 }
@@ -192,6 +195,7 @@ void Program::KeyInputs() {
     }
 
     if (startup && IsKeyPressed(KEY_ENTER)) {
+        StopSound(SoundManager::start); 
         startup = false;
     }
 
