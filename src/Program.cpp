@@ -32,6 +32,7 @@ Program::Program() {
 }
 
 void Program::Update() {
+    UpdateMusicStream(SoundManager::bg_music);
     for (Animation& a : Animation::animations) a.update();
     for (int i = 0; i < Animation::animations.size(); i++) {
         if (Animation::animations[i].done) Animation::animations.erase(Animation::animations.begin() + i);
@@ -77,7 +78,9 @@ void Program::Update() {
         }
 
 
-        if (lives <= 0 && pauseFrames <= 0) gameOver = true;
+        if (lives <= 0 && pauseFrames <= 0) {
+            StopMusicStream(SoundManager::bg_music); 
+            gameOver = true;}
         Projectile::CleanProjectiles();
         Projectile::ProjectileCollision();
     }
@@ -196,6 +199,8 @@ void Program::KeyInputs() {
 
     if (startup && IsKeyPressed(KEY_ENTER)) {
         StopSound(SoundManager::start); 
+        PlayMusicStream(SoundManager::bg_music);
+        SetMusicVolume(SoundManager::bg_music, 0.6f);
         startup = false;
     }
 

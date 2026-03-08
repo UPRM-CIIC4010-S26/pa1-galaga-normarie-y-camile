@@ -33,3 +33,11 @@ Re-added enemies to the next iterartion of the game: Normarie
 PHASE 2: Score Features: Normarie
 
 Made score for each enemy, score resets when player dies. 
+
+PHASE 3: Addsing Assests: Camile
+
+### BONUSES 
+
+Added Theme song
+
+Added Background song 

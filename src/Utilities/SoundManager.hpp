@@ -9,6 +9,7 @@ class SoundManager {
     static inline Sound hit;
     static inline Sound shoot;
     static inline Sound start;
+    static inline Music bg_music;
 
     static void Load() {
         attack = LoadSound("audio/attack.mp3");
@@ -17,6 +18,7 @@ class SoundManager {
         hit = LoadSound("audio/hit.mp3");
         shoot = LoadSound("audio/shoot.mp3");
         start = LoadSound("audio/Galaga_Theme.mp3");
+        bg_music = LoadMusicStream("audio/galaga_bg.mp3");
     }
 
     static void Unload() {
@@ -26,5 +28,6 @@ class SoundManager {
         UnloadSound(hit);
         UnloadSound(shoot);
         UnloadSound(start); 
+        UnloadMusicStream(bg_music);  
     }
 };
