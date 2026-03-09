@@ -9,8 +9,9 @@ class SoundManager {
     static inline Sound hit;
     static inline Sound shoot;
     static inline Sound start;
-    static inline Music bg_music;
-    static inline Music unhealing_music;
+    static inline Music bg_music; // BONUS
+    static inline Music unhealing_music; //BONUS
+    static inline Sound skull_kid; //BONUS
 
     static void Load() {
         attack = LoadSound("audio/attack.mp3");
@@ -21,6 +22,7 @@ class SoundManager {
         start = LoadSound("audio/Galaga_Theme.mp3");
         bg_music = LoadMusicStream("audio/galaga_bg.mp3");
         unhealing_music = LoadMusicStream("audio/unhealing.mp3");
+        skull_kid = LoadSound("audio/Skullkid_Laugh.mp3");
     }
 
     static void Unload() {
@@ -31,6 +33,7 @@ class SoundManager {
         UnloadSound(shoot);
         UnloadSound(start); 
         UnloadMusicStream(bg_music);  
-        UnloadMusicStream(unhealing_music);  
+        UnloadMusicStream(unhealing_music);
+        UnloadSound(skull_kid);  
     }
 };

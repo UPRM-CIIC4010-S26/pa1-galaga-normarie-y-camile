@@ -97,6 +97,25 @@ void Program::Update() {
         bonusLivesGiven++;
         }
     }
+    //BONUS: added majoras mask pop up at game over in Hell Mode
+    if (gameOver && hell_mode) {
+        // adding flicker
+        static int framesCounter = 0;
+        static int count = 0;
+        framesCounter++;
+        if (count < 45)
+        {
+            if ((framesCounter/ 5) % 2 == 0) {
+                count++;
+                DrawTexture(ImageManager::majoras, (GetScreenWidth()/2 - ImageManager::majoras.width/2), (GetScreenHeight()/2 - ImageManager::majoras.height/2) , WHITE);
+        }
+        }
+        // play skull kids laugh
+        if (!skull_kid_played && hell_mode) {
+            PlaySound(SoundManager::skull_kid);
+            skull_kid_played = true;
+        }
+    }
 }
 
 void Program::Draw() {
@@ -248,5 +267,6 @@ void Program::Reset() {
     delay = 0;
     lives = 3;
     score = 0;
+    skull_kid_played = false;
     Program();
 }

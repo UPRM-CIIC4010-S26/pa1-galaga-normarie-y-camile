@@ -27,6 +27,7 @@ class Program {
         bool paused = false;
         bool gameOver = false;
         bool hell_mode = false; //for the new game mode
+        bool skull_kid_played = false;
 
     public:
         Program();

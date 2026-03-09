@@ -43,3 +43,5 @@ Added Theme song
 Added Background song 
 
 Implemented Hell Mode
+
+Majoras Mask Pop-up at Game Over screen
