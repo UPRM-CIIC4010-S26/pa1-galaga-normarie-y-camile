@@ -26,6 +26,7 @@ class Program {
         bool startup = true;
         bool paused = false;
         bool gameOver = false;
+        bool hell_mode = false; //for the new game mode
 
     public:
         Program();

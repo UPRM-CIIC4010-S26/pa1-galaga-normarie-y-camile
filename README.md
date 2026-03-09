@@ -41,3 +41,5 @@ PHASE 3: Addsing Assests: Camile
 Added Theme song
 
 Added Background song 
+
+Implemented Hell Mode

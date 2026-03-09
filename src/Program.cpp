@@ -33,6 +33,7 @@ Program::Program() {
 
 void Program::Update() {
     UpdateMusicStream(SoundManager::bg_music);
+    UpdateMusicStream(SoundManager::unhealing_music);
     for (Animation& a : Animation::animations) a.update();
     for (int i = 0; i < Animation::animations.size(); i++) {
         if (Animation::animations[i].done) Animation::animations.erase(Animation::animations.begin() + i);
@@ -80,20 +81,22 @@ void Program::Update() {
 
         if (lives <= 0 && pauseFrames <= 0) {
             StopMusicStream(SoundManager::bg_music); 
+            StopMusicStream(SoundManager::unhealing_music); 
             gameOver = true;}
         Projectile::CleanProjectiles();
         Projectile::ProjectileCollision();
     }
     //std::cout << score << std::endl; test
-    // update lives 
-    int milestones = score / 1000;
-
-    while (bonusLivesGiven < milestones) {
+    // update lives (when it is not hell mode)
+    if (!hell_mode) {
+        int milestones = score / 1000;
+        while (bonusLivesGiven < milestones) {
         if (lives < 5) {
             lives++;
         }
         bonusLivesGiven++;
         }
+    }
 }
 
 void Program::Draw() {
@@ -126,8 +129,14 @@ void Program::ManageEnemyRespawns() {
     respawnCooldown -= 1;
     if (respawnCooldown <= 0) {
         //update cooldown speed 
-        respawnCooldown = 1080 - (score / 20);
-        respawnCooldown = std::max(respawnCooldown, 200);
+        if (!hell_mode) {
+            respawnCooldown = 1080 - (score / 20);
+            respawnCooldown = std::max(respawnCooldown, 200);
+        }
+        else {
+            respawnCooldown = 1000 - (score / 20);
+            respawnCooldown = std::max(respawnCooldown, 100);
+        }
         for (std::pair<std::pair<float, float>, Enemy*>& p : Enemy::enemies) {
             if (!p.second && p.first.second != 150) {
                 int eType = GetRandomValue(1, 3);
@@ -168,7 +177,8 @@ void Program::ManageEnemyRespawns() {
 void Program::DrawStartup() {
     DrawRectangle(0, 0, (float)GetScreenWidth(), (float)GetScreenHeight(), Color{0, 0, 0, 125});
     DrawText("Galaga", (GetScreenWidth() / 2 - 237), 75, 144, WHITE);
-    DrawText("Press Enter", (GetScreenWidth() / 2) - 75, GetScreenHeight() / 2, 24, GRAY);
+    DrawText("Normal Mode (Press Enter)", (GetScreenWidth() / 2) - 165, GetScreenHeight() / 2, 24, GRAY);
+    DrawText("Hell Mode (Press L)", (GetScreenWidth() / 2) - 125, (GetScreenHeight() / 2) - 70 , 24, GRAY);
 }
 
 void Program::DrawPauseScreen() {
@@ -180,7 +190,7 @@ void Program::DrawPauseScreen() {
 void Program::DrawGameOver() {
     DrawRectangle(0, 0, (float)GetScreenWidth(), (float)GetScreenHeight(), Color{0, 0, 0, 125});
     DrawText("Game Over", (GetScreenWidth() / 2) - 380, 50, 144, WHITE);
-    DrawText("Press Enter", (GetScreenWidth() / 2) - 75, GetScreenHeight() / 2, 24, GRAY);
+    DrawText("Press 'T' to try again", (GetScreenWidth() / 2) - 140, GetScreenHeight() / 2, 24, GRAY);
 }
 
 void Program::KeyInputs() {
@@ -191,9 +201,17 @@ void Program::KeyInputs() {
     if (IsKeyPressed('K')) {
         score += 500;
     }
-    
-    if (gameOver && IsKeyPressed(KEY_ENTER)) {
+    if (IsKeyPressed('L')) {
+        lives = 1; 
+        StopSound(SoundManager::start); 
+        startup = false;
+        hell_mode = true; 
+        PlayMusicStream(SoundManager::unhealing_music);
+        SetMusicVolume(SoundManager::unhealing_music, 0.6f);
+    }
+    if (gameOver && IsKeyPressed('T')) {
         gameOver = false;
+        startup = true; 
         Reset();
     }
 
