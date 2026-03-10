@@ -2,55 +2,61 @@
 
 void StdEnemy::draw() {
     if (HitBox::drawHitbox) this->hitBox.draw();
-    switch(this->type) {
-        case 1:
-            if (!frame) {
-                if (this->health > 1) {
-                    DrawTexturePro(ImageManager::SpriteSheet, Rectangle{2, 75, 15, 12}, 
-                                Rectangle{this->position.first, this->position.second, 30, 30}, 
-                                Vector2{0, 0}, 0, WHITE);
-                } else {
-                    DrawTexturePro(ImageManager::SpriteSheet, Rectangle{107, 75, 15, 12}, 
-                                Rectangle{this->position.first, this->position.second, 30, 30}, 
-                                Vector2{0, 0}, 0, WHITE);
-                }
-            } else {
-                if (this->health > 1) {
-                    DrawTexturePro(ImageManager::SpriteSheet, Rectangle{20, 75, 15, 12}, 
-                                Rectangle{this->position.first, this->position.second, 30, 30}, 
-                                Vector2{0, 0}, 0, WHITE);
-                } else {
-                    DrawTexturePro(ImageManager::SpriteSheet, Rectangle{125, 75, 15, 12}, 
-                                Rectangle{this->position.first, this->position.second, 30, 30}, 
-                                Vector2{0, 0}, 0, WHITE);
-                }
-            }
-            break;
-
-        case 2:
-            if (!frame) {
-                if (this->health > 1) {
-                    DrawTexturePro(ImageManager::SpriteSheet, Rectangle{2, 93, 15, 12}, 
-                                Rectangle{this->position.first, this->position.second, 30, 30}, 
-                                Vector2{0, 0}, 0, WHITE);
-                } else {
-                    DrawTexturePro(ImageManager::SpriteSheet, Rectangle{107, 93, 15, 12}, 
-                                Rectangle{this->position.first, this->position.second, 30, 30}, 
-                                Vector2{0, 0}, 0, WHITE);
-                }
-            } else {
-                if (this->health > 1) {
-                    DrawTexturePro(ImageManager::SpriteSheet, Rectangle{20, 93, 15, 12}, 
-                                Rectangle{this->position.first, this->position.second, 30, 30}, 
-                                Vector2{0, 0}, 0, WHITE);
-                } else {
-                    DrawTexturePro(ImageManager::SpriteSheet, Rectangle{125, 93, 15, 12}, 
-                                Rectangle{this->position.first, this->position.second, 30, 30}, 
-                                Vector2{0, 0}, 0, WHITE);
-                }
-            }
-            break;
+    if(isBoss) {
+        DrawTexturePro(ImageManager::moon, Rectangle{0,0,(float)ImageManager::moon.width, (float)ImageManager::moon.height}, 
+                    Rectangle{this->position.first, this->position.second, 175, 175}, 
+                    Vector2{0, 0}, 0, WHITE);
     }
+    else
+        switch(this->type) {
+            case 1:
+                if (!frame) {
+                    if (this->health > 1) {
+                        DrawTexturePro(ImageManager::SpriteSheet, Rectangle{2, 75, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    } else {
+                        DrawTexturePro(ImageManager::SpriteSheet, Rectangle{107, 75, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    }
+                } else {
+                    if (this->health > 1) {
+                        DrawTexturePro(ImageManager::SpriteSheet, Rectangle{20, 75, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    } else {
+                        DrawTexturePro(ImageManager::SpriteSheet, Rectangle{125, 75, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    }
+                }
+                break;
+
+            case 2:
+                if (!frame) {
+                    if (this->health > 1) {
+                        DrawTexturePro(ImageManager::SpriteSheet, Rectangle{2, 93, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    } else {
+                        DrawTexturePro(ImageManager::SpriteSheet, Rectangle{107, 93, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    }
+                } else {
+                    if (this->health > 1) {
+                        DrawTexturePro(ImageManager::SpriteSheet, Rectangle{20, 93, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    } else {
+                        DrawTexturePro(ImageManager::SpriteSheet, Rectangle{125, 93, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    }
+                }
+                break;
+        }
 }
 
 void StdEnemy::update(std::pair<float, float> pos, HitBox target) {

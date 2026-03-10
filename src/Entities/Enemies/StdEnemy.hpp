@@ -9,6 +9,7 @@ class StdEnemy : public Enemy {
         inline static int attackCooldown = 360;
 
     public:
+        bool isBoss = false;
         inline static bool attackInProgress = false;
         StdEnemy(float x, float y) : Enemy(x, y) { 
             this->cooldown = GetRandomValue(240, 1380);

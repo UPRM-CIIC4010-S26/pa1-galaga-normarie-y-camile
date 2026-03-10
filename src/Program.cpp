@@ -5,30 +5,7 @@ Program::Program() {
         HitBox(0, 0, 10, GetScreenHeight()), 
         HitBox(GetScreenWidth() - 10, 0, 10, GetScreenHeight())
     };
-
-    Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
-            std::pair<float, float>{350, 150}, 
-            new SpEnemy(350, 150)
-        });
-
-    Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
-            std::pair<float, float>{600, 150}, 
-            new SpEnemy(600, 150)
-        });
-
-    for (int i = 0; i < 30; i++) {
-        int col = i % 10;
-        int row = i / 10;
-        float x = 250 + 50 * col;
-        float y = 200 + 50 * row;
-
-        Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
-            std::pair<float, float>{x, y}, 
-            new StdEnemy(x, y)
-        });
-    }
-    PlaySound(SoundManager::start);
-
+PlaySound(SoundManager::start);
 }
 
 void Program::Update() {
@@ -221,24 +198,30 @@ void Program::KeyInputs() {
         score += 500;
     }
     if (IsKeyPressed('L')) {
-        lives = 1; 
+        StopMusicStream(SoundManager::bg_music);
         StopSound(SoundManager::start); 
         startup = false;
         hell_mode = true; 
         PlayMusicStream(SoundManager::unhealing_music);
         SetMusicVolume(SoundManager::unhealing_music, 0.6f);
+        Reset();
     }
     if (gameOver && IsKeyPressed('T')) {
         gameOver = false;
         startup = true; 
-        Reset();
+        Enemy::enemies.clear();
+        Projectile::projectiles.clear();
+        Animation::animations.clear();
     }
 
     if (startup && IsKeyPressed(KEY_ENTER)) {
+        StopMusicStream(SoundManager::unhealing_music);
         StopSound(SoundManager::start); 
         PlayMusicStream(SoundManager::bg_music);
         SetMusicVolume(SoundManager::bg_music, 0.6f);
         startup = false;
+        hell_mode = false;
+        Reset();
     }
 
     if (!startup && !paused && !gameOver && pauseFrames <= 0) player->keyInputs();
@@ -259,14 +242,85 @@ void Program::PlayerReset() {
 
 void Program::Reset() {
     Enemy::enemies.clear();
+    Projectile::projectiles.clear();
+    Animation::animations.clear();
     StdEnemy::attackInProgress = false;
     player = new Player((GetScreenWidth() / 2) - 15, GetScreenHeight() * 0.75f);
     respawnCooldown = 1080;
     respawns = 0;
     count = 0;
     delay = 0;
-    lives = 3;
     score = 0;
     skull_kid_played = false;
-    Program();
+    if(hell_mode)
+        lives = 1;
+    else
+        lives = 3;
+    if(hell_mode) {
+        Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
+            std::pair<float, float>{200, 150}, 
+            new SpEnemy(200, 150)
+        });
+
+        Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
+            std::pair<float, float>{600, 150}, 
+            new SpEnemy(600, 150)
+        });
+        //amount of enemies on screen (rn its 60 normal)
+        for (int i = 0; i <60; i++) {
+            int col = i % 12;
+            int row = i / 12;
+            float x = 150 + 45 * col;
+            float y = 250 + 45 * row;
+
+            Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
+                std::pair<float, float>{x, y}, 
+                new StdEnemy(x, y)
+            });
+        }
+        
+        Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
+            std::pair<float, float>{100, 400}, 
+            new DyEnemy(100, 400)
+        });
+        
+        Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
+            std::pair<float, float>{GetScreenWidth()-150, 400}, 
+            new DyEnemy(GetScreenWidth()-150, 400)
+        });
+        //Boss is the Moon
+        StdEnemy* boss = new StdEnemy(GetScreenWidth()/2 - 100, 150);
+        boss->isBoss = true;         
+        boss->health = 50;             
+        boss->hitBox.setSize(200, 200);
+        boss->position.first = GetScreenWidth()/2 - 150;
+        boss->position.second = 50;
+        
+        Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
+            std::pair<float, float>{boss->position.first, boss->position.second}, 
+            boss
+        });
+    } else {
+        Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
+            std::pair<float, float>{350, 150}, 
+            new SpEnemy(350, 150)
+        });
+
+        Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
+            std::pair<float, float>{600, 150}, 
+            new SpEnemy(600, 150)
+        });
+
+        for (int i = 0; i < 30; i++) {
+            int col = i % 10;
+            int row = i / 10;
+            float x = 250 + 50 * col;
+            float y = 200 + 50 * row;
+
+            Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
+                std::pair<float, float>{x, y}, 
+                new StdEnemy(x, y)
+            });
+        }
+    }
 }
