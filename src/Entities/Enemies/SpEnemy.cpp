@@ -1,31 +1,53 @@
 #include "SpEnemy.hpp"
 
 void SpEnemy::draw() {
-    if (HitBox::drawHitbox) this->hitBox.draw();
+if (HitBox::drawHitbox) this->hitBox.draw(); 
     if (health > 2) {
-        if (!frame) {
-            DrawTexturePro(ImageManager::SpriteSheet, Rectangle{1, 36, 17, 18}, 
-                           Rectangle{this->position.first, this->position.second, 30, 30}, 
-                           Vector2{0, 0}, 0, WHITE);
+        if(Enemy::HellTexture) {
+            if (!frame) {
+                DrawTexturePro(ImageManager::hsprites, Rectangle{1, 36, 17, 18}, 
+                            Rectangle{this->position.first, this->position.second, 30, 30}, 
+                            Vector2{0, 0}, 0, WHITE);
+            } else {
+                DrawTexturePro(ImageManager::hsprites, Rectangle{19, 36, 17, 18}, 
+                            Rectangle{this->position.first, this->position.second, 30, 30}, 
+                            Vector2{0, 0}, 0, WHITE);
+            }
         } else {
-            DrawTexturePro(ImageManager::SpriteSheet, Rectangle{19, 36, 17, 18}, 
-                           Rectangle{this->position.first, this->position.second, 30, 30}, 
-                           Vector2{0, 0}, 0, WHITE);
+            if (!frame) {
+                DrawTexturePro(ImageManager::SpriteSheet, Rectangle{1, 36, 17, 18}, 
+                            Rectangle{this->position.first, this->position.second, 30, 30}, 
+                            Vector2{0, 0}, 0, WHITE);
+            } else {
+                DrawTexturePro(ImageManager::SpriteSheet, Rectangle{19, 36, 17, 18}, 
+                            Rectangle{this->position.first, this->position.second, 30, 30}, 
+                            Vector2{0, 0}, 0, WHITE);
+            }
         }
-
     } else {
-        if (!frame) {
-            DrawTexturePro(ImageManager::SpriteSheet, Rectangle{1, 54, 17, 18}, 
-                       Rectangle{this->position.first, this->position.second, 30, 30}, 
-                       Vector2{0, 0}, 0, WHITE);
+        if(Enemy::HellTexture) {
+            if (!frame) {
+                DrawTexturePro(ImageManager::hsprites, Rectangle{1, 54, 17, 18}, 
+                            Rectangle{this->position.first, this->position.second, 30, 30}, 
+                            Vector2{0, 0}, 0, WHITE);
+            } else {
+                DrawTexturePro(ImageManager::hsprites, Rectangle{19, 54, 17, 18}, 
+                            Rectangle{this->position.first, this->position.second, 30, 30}, 
+                            Vector2{0, 0}, 0, WHITE);
+            }
         } else {
-            DrawTexturePro(ImageManager::SpriteSheet, Rectangle{19, 54, 17, 18}, 
-                       Rectangle{this->position.first, this->position.second, 30, 30}, 
-                       Vector2{0, 0}, 0, WHITE);
+            if (!frame) {
+                DrawTexturePro(ImageManager::SpriteSheet, Rectangle{1, 54, 17, 18}, 
+                            Rectangle{this->position.first, this->position.second, 30, 30}, 
+                            Vector2{0, 0}, 0, WHITE);
+            } else {
+                DrawTexturePro(ImageManager::SpriteSheet, Rectangle{19, 54, 17, 18}, 
+                            Rectangle{this->position.first, this->position.second, 30, 30}, 
+                            Vector2{0, 0}, 0, WHITE);
+            }
         }
     }
 }
-
 void SpEnemy::update(std::pair<float, float> pos, HitBox target) {
     frameChange();
 

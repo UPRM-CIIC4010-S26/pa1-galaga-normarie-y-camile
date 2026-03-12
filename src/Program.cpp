@@ -201,17 +201,19 @@ void Program::KeyInputs() {
         StopMusicStream(SoundManager::bg_music);
         StopSound(SoundManager::start); 
         startup = false;
-        hell_mode = true; 
+        hell_mode = true;
+        Enemy::HellTexture = true;
         PlayMusicStream(SoundManager::unhealing_music);
         SetMusicVolume(SoundManager::unhealing_music, 0.6f);
         Reset();
     }
     if (gameOver && IsKeyPressed('T')) {
         gameOver = false;
-        startup = true; 
+        startup = true;
         Enemy::enemies.clear();
         Projectile::projectiles.clear();
         Animation::animations.clear();
+        Reset();
     }
 
     if (startup && IsKeyPressed(KEY_ENTER)) {
@@ -221,6 +223,8 @@ void Program::KeyInputs() {
         SetMusicVolume(SoundManager::bg_music, 0.6f);
         startup = false;
         hell_mode = false;
+        Enemy::HellTexture = false;
+
         Reset();
     }
 

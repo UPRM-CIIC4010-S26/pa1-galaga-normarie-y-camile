@@ -20,6 +20,7 @@ class Enemy {
         HitBox hitBox;
         int scoreValue;
         bool killed= false;
+        inline static bool HellTexture = false;
 
         inline static float direction = 0.5;
         inline static int directionChange = 100;

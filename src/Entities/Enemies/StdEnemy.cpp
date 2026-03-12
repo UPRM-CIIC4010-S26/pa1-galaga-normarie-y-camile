@@ -8,6 +8,57 @@ void StdEnemy::draw() {
                     Vector2{0, 0}, 0, WHITE);
     }
     else
+        if(Enemy::HellTexture) {
+            switch(this->type) {
+            case 1:
+                if (!frame) {
+                    if (this->health > 1) {
+                        DrawTexturePro(ImageManager::hsprites, Rectangle{2, 75, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    } else {
+                        DrawTexturePro(ImageManager::hsprites, Rectangle{107, 75, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    }
+                } else {
+                    if (this->health > 1) {
+                        DrawTexturePro(ImageManager::hsprites, Rectangle{20, 75, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    } else {
+                        DrawTexturePro(ImageManager::hsprites, Rectangle{125, 75, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    }
+                }
+                break;
+
+            case 2:
+                if (!frame) {
+                    if (this->health > 1) {
+                        DrawTexturePro(ImageManager::hsprites, Rectangle{2, 93, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    } else {
+                        DrawTexturePro(ImageManager::hsprites, Rectangle{107, 93, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    }
+                } else {
+                    if (this->health > 1) {
+                        DrawTexturePro(ImageManager::hsprites, Rectangle{20, 93, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    } else {
+                        DrawTexturePro(ImageManager::hsprites, Rectangle{125, 93, 15, 12}, 
+                                    Rectangle{this->position.first, this->position.second, 30, 30}, 
+                                    Vector2{0, 0}, 0, WHITE);
+                    }
+                }
+                break;
+        }
+        } else {
         switch(this->type) {
             case 1:
                 if (!frame) {
@@ -58,7 +109,7 @@ void StdEnemy::draw() {
                 break;
         }
 }
-
+}
 void StdEnemy::update(std::pair<float, float> pos, HitBox target) {
     frameChange();
     if (!spawning && this->specialCooldown > 0) {
