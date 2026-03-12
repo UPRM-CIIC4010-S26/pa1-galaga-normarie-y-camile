@@ -13,7 +13,7 @@ Don't forget that you must also fill out an evaluation form in Moodle to conside
 
 (802-25-7836)  (Normarie Martinez Flores)  (normarie.martinez@upr.edu)
 
-(STUDENT NUMBER HERE) (STUDENT NAME HERE) (STUDENT EMAIL HERE)
+(802-25-2775) (Camile J Rodriguez Vega) (camile.rodriguez@upr.edu)
 
 Any project that doesn't compile will receive a 0.
 
@@ -44,4 +44,14 @@ Added Background song
 
 Implemented Hell Mode
 
-Majoras Mask Pop-up at Game Over screen
+New Background song in Hell Mode
+
+Majoras Mask Pop-up at Game Over screen and sound
+
+More enemies in Hell Mode
+
+Enemies in Hell Mode have a different texture
+
+Added a "BOSS"
+
+BOSS has a new texture
