@@ -3,6 +3,17 @@
 
 void DyEnemy::draw() {
     if (HitBox::drawHitbox) this->hitBox.draw();
+    if(Enemy::HellTexture) {
+        if (GetRandomValue(0,1)==0) {
+        DrawTexturePro(ImageManager::hsprites, Rectangle {2, 147, 13, 13}, 
+                Rectangle{this->position.first + 15, this->position.second + 15, 30, 30}, 
+                Vector2{15, 15}, this->aimAngle, WHITE);
+    } else {
+        DrawTexturePro(ImageManager::hsprites, Rectangle {2, 128, 13, 14}, 
+                Rectangle{this->position.first + 15, this->position.second + 15, 30, 30}, 
+                Vector2{15, 15}, this->aimAngle, WHITE);
+    }
+    } else {
     if (GetRandomValue(0,1)==0) {
         DrawTexturePro(ImageManager::SpriteSheet, Rectangle {2, 147, 13, 13}, 
                 Rectangle{this->position.first + 15, this->position.second + 15, 30, 30}, 
@@ -13,7 +24,7 @@ void DyEnemy::draw() {
                 Vector2{15, 15}, this->aimAngle, WHITE);
     }
 }
-
+}
 void DyEnemy::update(std::pair<float, float> pos, HitBox target) {
     this->cooldown--;
 
