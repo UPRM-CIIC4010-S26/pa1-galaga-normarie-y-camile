@@ -55,3 +55,11 @@ Enemies in Hell Mode have a different texture
 Added a "BOSS"
 
 BOSS has a new texture
+
+##### Hell Mode
+
+- Only 1 live, you can't heal even if your score increases
+
+- Zelda Majoras Mask themed 
+
+- Have fun 
